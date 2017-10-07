@@ -30,10 +30,10 @@ import enums.Terrain;
  * 
  * @author rkjc
  * 
- * ROVER_00 is intended to be a basic template to start building your rover on
+ * ROVER_04 is intended to be a basic template to start building your rover on
  * Start by refactoring the class name to match your rovers name.
  * Then do a find and replace to change all the other instances of the 
- * name "ROVER_00" to match your rovers name.
+ * name "ROVER_04" to match your rovers name.
  * 
  * The behavior of this robot is a simple travel till it bumps into something,
  * sidestep for a short distance, and reverse direction,
@@ -64,14 +64,14 @@ public class ROVER_04 extends Rover {
 
 	public ROVER_04() {
 		// constructor
-		System.out.println("ROVER_00 rover object constructed");
-		rovername = "ROVER_00";
+		System.out.println("ROVER_04 rover object constructed");
+		rovername = "ROVER_04";
 	}
 	
 	public ROVER_04(String serverAddress) {
 		// constructor
-		System.out.println("ROVER_00 rover object constructed");
-		rovername = "ROVER_00";
+		System.out.println("ROVER_04 rover object constructed");
+		rovername = "ROVER_04";
 		SERVER_ADDRESS = serverAddress;
 	}
 
@@ -260,7 +260,7 @@ public class ROVER_04 extends Rover {
 				// this is the Rovers HeartBeat, it regulates how fast the Rover cycles through the control loop
 				Thread.sleep(sleepTime);
 				
-				System.out.println("ROVER_00 ------------ end process control loop --------------"); 
+				System.out.println("ROVER_04 ------------ end process control loop --------------"); 
 			}  // ***** END of Rover control While(true) loop *****
 		
 			
@@ -274,7 +274,7 @@ public class ROVER_04 extends Rover {
 	            try {
 	            	socket.close();
 	            } catch (IOException e) {
-	            	System.out.println("ROVER_00 problem closing socket");
+	            	System.out.println("ROVER_04 problem closing socket");
 	            }
 	        }
 	    }
