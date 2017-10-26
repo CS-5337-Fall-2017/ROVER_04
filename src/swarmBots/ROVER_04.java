@@ -114,11 +114,19 @@ public class ROVER_04 extends Rover {
 			 *  add more as needed
 			 */
 			int stepCount = 0;	
+			int step = 0;
+			int stepN = 0;
+			int stepW = 0; 
 			String line = "";	
+			boolean goingWest = false;
 			boolean goingSouth = false;
+			boolean goingEast = false;
 			boolean stuck = false; // just means it did not change locations between requests,
 									// could be velocity limit or obstruction etc.
 			boolean blocked = false;
+			boolean blockedE = false;
+			boolean blockedN = false;
+			boolean blockedW = false;
 	
 			// might or might not have a use for this
 			String[] cardinals = new String[4];
@@ -202,6 +210,7 @@ public class ROVER_04 extends Rover {
 				// try moving east 5 block if blocked
 				if (blocked) {
 					if(stepCount > 0){
+						goingEast = true;
 						moveEast();
 						stepCount -= 1;
 					}
@@ -211,7 +220,46 @@ public class ROVER_04 extends Rover {
 						goingSouth = !goingSouth;
 					}
 					
-				} else {
+				}else if (blockedE) {
+					if(step > 0){
+						moveNorth();
+						step -= 1;
+					}
+					else {
+						blockedE = false;
+						//reverses direction after being blocked and side stepping
+						goingEast = !goingEast;
+					}
+					
+				}else if (blockedN) {
+					if(stepN > 0){
+						//goingEast = true;
+						goingWest = true;
+						moveWest();
+						//moveEast();
+						stepN -= 1;
+					}
+					else {
+						blockedN = false;
+						//reverses direction after being blocked and side stepping
+						//goingNorth = !goingNorth;
+					}
+					
+				}else if (blockedW) {
+					if(stepW > 0){
+						moveSouth();
+						stepW -= 1;
+					}
+					else {
+						blockedW = false;
+						//reverses direction after being blocked and side stepping
+						//goingNorth = !goingNorth;
+						goingWest = !goingWest;
+					}
+					
+				}
+				
+				else {
 	
 					// pull the MapTile array out of the ScanMap object
 					MapTile[][] scanMapTiles = scanMap.getScanMap();
@@ -233,7 +281,36 @@ public class ROVER_04 extends Rover {
 
 						}
 						
-					} else {
+					}else if (goingEast) {
+						// check scanMap to see if path is blocked to the east
+						// (scanMap may be old data by now)
+						if (scanMapTiles[centerIndex +1][centerIndex ].getHasRover() 
+								|| scanMapTiles[centerIndex+1][centerIndex ].getTerrain() == Terrain.ROCK
+								|| scanMapTiles[centerIndex+1][centerIndex ].getTerrain() == Terrain.SAND
+								|| scanMapTiles[centerIndex+1][centerIndex ].getTerrain() == Terrain.NONE) {
+							blockedE = true;
+							step = 5;  //side stepping
+						} else {
+							// request to server to move
+							moveEast();
+
+						}
+						
+					}  else if(goingWest){
+						// check scanMap to see if path is blocked to the north
+						// (scanMap may be old data by now)
+						
+						if (scanMapTiles[centerIndex-1][centerIndex ].getHasRover() 
+								|| scanMapTiles[centerIndex-1][centerIndex ].getTerrain() == Terrain.ROCK
+								|| scanMapTiles[centerIndex-1][centerIndex ].getTerrain() == Terrain.SAND
+								|| scanMapTiles[centerIndex-1][centerIndex ].getTerrain() == Terrain.NONE) {
+							blockedW = true;
+							stepW = 5;  //side stepping
+						} else {
+							// request to server to move
+							moveWest();			
+						}					
+					}else {
 						// check scanMap to see if path is blocked to the north
 						// (scanMap may be old data by now)
 						
@@ -241,14 +318,21 @@ public class ROVER_04 extends Rover {
 								|| scanMapTiles[centerIndex][centerIndex -1].getTerrain() == Terrain.ROCK
 								|| scanMapTiles[centerIndex][centerIndex -1].getTerrain() == Terrain.SAND
 								|| scanMapTiles[centerIndex][centerIndex -1].getTerrain() == Terrain.NONE) {
-							blocked = true;
-							stepCount = 5;  //side stepping
+							blockedN = true;
+							stepN = 5;  //side stepping
 						} else {
 							// request to server to move
 							moveNorth();			
 						}					
 					}
-				}
+					
+					//movement for the east and the west
+
+					
+					
+					
+					
+				}//main-else
 	
 				// another call for current location
 				currentLoc = getCurrentLocation();
