@@ -259,9 +259,9 @@ public class ROVER_04 extends Rover {
 									|| scanMapTiles[centerIndex][centerIndex+1].getTerrain() == Terrain.NONE) {
 								
 									if (scanMapTiles[centerIndex][centerIndex-1].getHasRover() 
-											|| scanMapTiles[centerIndex-1][centerIndex-1].getTerrain() == Terrain.ROCK
-											|| scanMapTiles[centerIndex-1][centerIndex-1].getTerrain() == Terrain.SAND
-											|| scanMapTiles[centerIndex-1][centerIndex-1].getTerrain() == Terrain.NONE){
+											|| scanMapTiles[centerIndex][centerIndex-1].getTerrain() == Terrain.ROCK
+											|| scanMapTiles[centerIndex][centerIndex-1].getTerrain() == Terrain.SAND
+											|| scanMapTiles[centerIndex][centerIndex-1].getTerrain() == Terrain.NONE){
 									
 											if (scanMapTiles[centerIndex-1][centerIndex].getHasRover() 
 													|| scanMapTiles[centerIndex-1][centerIndex].getTerrain() == Terrain.ROCK
@@ -579,13 +579,13 @@ public class ROVER_04 extends Rover {
 					
 					if(scanMapTiles[centerIndex+1][centerIndex].getHasRover()
 							|| scanMapTiles[centerIndex+1][centerIndex].getTerrain() == Terrain.ROCK
-							|| scanMapTiles[centerIndex][centerIndex +1].getTerrain() == Terrain.SAND
-							|| scanMapTiles[centerIndex][centerIndex +1].getTerrain() == Terrain.NONE)
-					{
-						if(scanMapTiles[centerIndex+1][centerIndex].getHasRover()
-							|| scanMapTiles[centerIndex+1][centerIndex].getTerrain() == Terrain.ROCK
 							|| scanMapTiles[centerIndex+1][centerIndex].getTerrain() == Terrain.SAND
 							|| scanMapTiles[centerIndex+1][centerIndex].getTerrain() == Terrain.NONE)
+					{
+						if(scanMapTiles[centerIndex][centerIndex+1].getHasRover()
+							|| scanMapTiles[centerIndex][centerIndex+1].getTerrain() == Terrain.ROCK
+							|| scanMapTiles[centerIndex][centerIndex+1].getTerrain() == Terrain.SAND
+							|| scanMapTiles[centerIndex][centerIndex+1].getTerrain() == Terrain.NONE)
 						{
 							if(scanMapTiles[centerIndex][centerIndex-1].getHasRover()
 									|| scanMapTiles[centerIndex][centerIndex-1].getTerrain() == Terrain.ROCK
