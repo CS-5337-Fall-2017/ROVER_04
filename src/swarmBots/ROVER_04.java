@@ -208,6 +208,8 @@ public class ROVER_04 extends Rover {
 				// try moving east 5 block if blocked
 				if (blocked) {
 					if(stepCount > 0){
+						if (stepCount == 5)
+						{
 						if (random >=0 && random <= 2)
 						{
 							goingEast = true;
@@ -243,6 +245,7 @@ public class ROVER_04 extends Rover {
 							goingEast = false;
 							
 							
+						}
 						}
 						
 //Check if the east is free to walk
