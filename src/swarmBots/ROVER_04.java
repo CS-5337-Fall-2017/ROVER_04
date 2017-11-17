@@ -174,7 +174,9 @@ public class ROVER_04 extends Rover {
 				
 				// after getting location set previous equal current to be able
 				// to check for stuckness and blocked later
-				previousLoc = currentLoc;		
+				previousLoc = currentLoc;	
+				
+				gatherScience(currentLoc);
 				
 				
 
@@ -202,7 +204,11 @@ public class ROVER_04 extends Rover {
 // Start of Change of code for Fall 2017 -Group 04	
 				// pull the MapTile array out of the ScanMap object
 				MapTile[][] scanMapTiles = scanMap.getScanMap();
-				int centerIndex = (scanMap.getEdgeSize() - 1)/2;	
+				
+				
+				int centerIndex = (scanMap.getEdgeSize() - 1)/2;
+				System.out.println("See whats here="+ scanMapTiles[centerIndex][centerIndex].getScience().toString());
+				 
 				int random = (int)(Math.random()*10);
 				// ***** MOVING *****
 				// try moving east 5 block if blocked
